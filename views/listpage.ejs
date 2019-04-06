@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head> <% include ./head %> </head>
+<style>
+    h1.a {
+        text-align: center;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+    function counter() {
+        items.likes++;
+        console.log(items.likes);
+    }
+</script>
+
 <body>
 <% include ./header %>
 
@@ -10,19 +24,28 @@
 
     <table class="highlight">
         <tr>
-            <th>Song</th><th>Singer</th><th>Added By</th><th>Likes</th><th>Actions</th>
+            <th>Added by</th><th>Game</th><th>Creator</th><th>Link</th><th>Email</th><th>Date</th><th>Likes</th><th>Actions</th>
         </tr>
 
         <% items.forEach(function(item){  %>
-
+        <tr> <td> <%= item.addedBy %> </td>
+        <td> <%= item.game %> </td>
+        <td> <%= item.creator %> </td>
+        <td> <a href="<%= item.link %>">Website</a></td>
+        <td> <%= item.email %> </td>
+        <td> <%= item.date %> </td>
+        <td> <%= item.likes %> </td>
+        <td> <button class="btn" onclick="counter()"><i class="fa fa-heart"></i></button> </td>
+        </tr>
 
 
 
 
         <% }) %>
     </table>
-
     </div>
+
+
 
 <% include ./footer %>
 </body>

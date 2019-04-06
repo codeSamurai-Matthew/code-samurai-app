@@ -12,8 +12,13 @@
 
 
 
-
-        Added by: <input type="text" name="addedBy" value="<%=loginName%>" readonly/>
+        Added By: <input type="text" name="addedBy" value="<%= loginName%>" readonly/>
+        Game: <input type="text" name="game" required/>
+        Creator: <input type="text" name="creator" required/>
+        Download Link: <input type="url" name="link" value="https://" required/>
+        Creator Email: <input type="email" name="email" value="example@example.com" required/>
+        Date: <input type="date" name="date" required/>
+        Likes: <input type="number" name="likes" value=0 readonly/>
 
         <button class="btn" type="submit" name="submit">Save Item</button>
 

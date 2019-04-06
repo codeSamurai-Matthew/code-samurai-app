@@ -47,7 +47,10 @@ console.log('Trending app started on http://localhost:'+port);
 
 // function to match username and password
 function userPasswordMatch (userName, password) {
+    console.log(userName);
+    console.log(password);
     var loginUser = User.findOne({username:userName,password:password});
+    console.log(loginUser);
     if (loginUser != null) return true;
     else return false;
 }
@@ -98,31 +101,36 @@ app.get('/additem', function (request, response) {
     response.render('addpage',{loginName:request.session.user});
 });
 
-
-
 // click Welcome on login page
 app.post('/login', function (request, response) {
+    databaseInitialize();
     var loginName = request.body.loginName;
     var password = request.body.password;
 
     // save login name in session so it's available later
-    request.session.user = loginName;
+
 
     //hint: check is password is good or not, if not load same page with error as below
     //response.render('index', {message: "Invalid user name or password"});
 
-    response.render('listpage', {items: Item.find()});
-
+    if (userPasswordMatch(loginName, password)) {
+        request.session.user = loginName;
+        response.render('listpage', {items: Item.find()});
+    }
+    else {
+        response.render('index', {message: "Invalid user name or password"});
+    }
 });
-
-
 
 // when save button is clicked on add page
 app.post('/saveitem', function (request, response) {
-
+    var game = request.body;
+    var name = request.body.name;
+    var items = saveFormAndReturnAllItems(game);
     // hint #1: find the helper function that will help save the information first
     // hint #2: make sure to send the list of items to the list page
+    //var names = likeAndSort(name);
 
-    response.render('listpage',{ items:[] });
+    response.render('listpage',{ items:items });
 });
 
