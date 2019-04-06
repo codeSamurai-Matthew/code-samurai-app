@@ -101,6 +101,18 @@ app.get('/additem', function (request, response) {
     response.render('addpage',{loginName:request.session.user});
 });
 
+app.get('/like', function (request, response) {
+    var game = request.query.game;
+    var items = likeAndSort('game',game);
+    response.render('listpage', {items:items} );
+});
+
+app.get('/delete', function (request, response) {
+    var game = request.query.game;
+    var items = deleteAndSort('game',game);
+    response.render('listpage', {items:items} );
+});
+
 // click Welcome on login page
 app.post('/login', function (request, response) {
     databaseInitialize();

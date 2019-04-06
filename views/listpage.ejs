@@ -8,15 +8,17 @@
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script>
-    function counter() {
-        items.likes++;
-        console.log(items.likes);
-    }
-</script>
+
 
 <body>
 <% include ./header %>
+    <script type="text/javascript">
+    var clicks = 0;
+    function onClick() {
+        clicks += 1;
+        document.getElementById("clicks").innerHTML = clicks;
+    };
+    </script>
 
     <a class="btn" href="/additem">Add New Item</a>
 
@@ -34,10 +36,11 @@
         <td> <a href="<%= item.link %>">Website</a></td>
         <td> <%= item.email %> </td>
         <td> <%= item.date %> </td>
-        <td> <%= item.likes %> </td>
-        <td> <button class="btn" onclick="counter()"><i class="fa fa-heart"></i></button> </td>
+        <td> <%= item.likes %></td>
+            <td> <a href="/like?game=<%=item.game %>"><i class="material-icons">favorite</i></a>
+                 <a href="/delete?game=<%=item.game %>"><i class="material-icons">delete</i></a>
+            </td>
         </tr>
-
 
 
 
